@@ -115,6 +115,9 @@ volumes:
     configMap:
       name: flask-config
 
+  - name: init-volume
+    emptyDir: {}
+
 # - name: foo
 #   secret:
 #     secretName: mysecret
@@ -126,6 +129,9 @@ volumeMounts:
     mountPath: "/config/config.json"
     subPath: "config.json"
     readOnly: true
+
+  - name: init-volume
+    mountPath: "/init-volume"
 
 # - name: foo
 #   mountPath: "/etc/foo"
@@ -145,4 +151,40 @@ podManagementPolicy: Parallel
 volumeClaimTemplates:
   name: app-python-pvc
   storage: 512Mi
-
+initContainers:
+  - name: init-fetch
+    image: busybox:1.28
+    command:
+    - sh
+    - -c
+    - wget -qO /init-volume/index.html https://example.com
+    volumeMounts:
+    - name: init-volume
+      mountPath: "/init-volume"
+  - name: init-line-1
+    image: busybox:1.28
+    command:
+    - sh
+    - -c
+    - echo "line 1" >> /init-volume/queue.txt
+    volumeMounts:
+    - name: init-volume
+      mountPath: "/init-volume"
+  - name: init-line-2
+    image: busybox:1.28
+    command:
+    - sh
+    - -c
+    - echo "line 2" >> /init-volume/queue.txt
+    volumeMounts:
+    - name: init-volume
+      mountPath: "/init-volume"
+  - name: init-line-3
+    image: busybox:1.28
+    command:
+    - sh
+    - -c
+    - echo "line 3" >> /init-volume/queue.txt
+    volumeMounts:
+    - name: init-volume
+      mountPath: "/init-volume"
