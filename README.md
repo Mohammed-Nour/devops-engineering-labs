@@ -1,81 +1,53 @@
 # DevOps Engineering Labs
 
-## Introduction
+These are my DevOps labs from Innopolis University. I started with small web applications, then added Docker builds, CI pipelines, infrastructure configuration, and Kubernetes deployments.
 
-Welcome to the DevOps Engineering course labs! These hands-on labs are designed to guide you through various aspects of DevOps practices and principles. As you progress through the labs, you'll gain practical experience in application development, containerization, testing, infrastructure setup, CI/CD processes, and more.
+The labs follow the [DevOps Core Course](https://github.com/inno-devops-labs/DevOps-Core-Course). I kept the original course introduction and grading rules in [COURSE.md](COURSE.md).
 
-## Lab Syllabus
+## Start here
 
-Lab 1: Web Application Development
-Lab 2: Containerization
-Lab 3: Continuous Integration
-Lab 4: Infrastructure as Code & Terraform
-Lab 5: Configuration Management
-Lab 6: Ansible Automation
-Lab 7: Observability, Logging, Loki Stack
-Lab 8: Monitoring & Prometheus
-Lab 9: Kubernetes & Declarative Manifests
-Lab 10: Helm Charts & Library Charts
-Lab 11: Kubernetes Secrets Management (Vault, ConfigMaps)
-Lab 12: Kubernetes ConfigMaps & Environment Variables
-Lab 13: GitOps with ArgoCD
-Lab 14: StatefulSet Optimization
-Lab 15: Kubernetes Monitoring & Init Containers
-Lab 16: IPFS & Fleek Decentralization
+| Topic | Files and walkthroughs |
+|-------|------------------------|
+| Applications and tests | [Python/Flask](app_python/README.md), [Go](app_go/README.md), and [React](app_react/README.md) |
+| Containers | [Python Docker guide](app_python/DOCKER.md), [Go Docker guide](app_go/DOCKER.md), standard and distroless Dockerfiles |
+| Continuous integration | [Python workflow](.github/workflows/python-app.yml) and [Go workflow](.github/workflows/go-app.yml) |
+| Infrastructure as code | [Terraform configurations](terraform/) |
+| Configuration management | [Ansible guide](ansible/ANSIBLE.md) and [roles](ansible/roles/) |
+| Kubernetes and Helm | [Kubernetes guide](k8s/README.md), [Helm guide](k8s/helm/HELM.md), and [charts](k8s/helm/) |
+| Secrets and configuration | [Vault and secrets exercise](k8s/11.md), [ConfigMaps exercise](k8s/12.md) |
+| GitOps | [ArgoCD implementation walkthrough](k8s/13.md) and [application manifests](k8s/ArgoCD/) |
+| Monitoring and logging | [Monitoring configuration](monitoring/) |
+| Stateful workloads | [StatefulSet exercise](k8s/14.md) |
 
-## Architecture
+## What I worked on
 
-This repository has a master branch containing an introduction. Each new lab assignment will be added as a markdown file with a lab number.
+- Built standard and distroless Docker images for the Python and Go applications.
+- Added CI stages for security checks, linting, tests, and Docker image publishing.
+- Used Ansible roles to install Docker and deploy the applications.
+- Wrote Kubernetes manifests and Helm charts for configuration, secrets, and persistent workloads.
+- Set up ArgoCD for dev and prod environments and tested how it handles configuration drift.
 
-## Rules
+The guides include commands, screenshots, and output from the lab runs. Some workflows still reference lab branches, so check their configuration before reusing them.
 
-To successfully complete the labs and pass the course, follow these rules:
+## Explore the applications
 
-1. **Lab Dependency:** Complete the labs in order; each lab builds upon the previous one.
-2. **Submission and Grading:** Submit your solutions as pull requests (PRs) to the master branch of this repository. You need at least 6/10 points for each lab to pass.
-3. **Fork Repository:** Fork this repository to your workspace to create your own version for solving the labs.
-4. **Recommended Workflow:** Build your solutions incrementally. Complete lab N based on lab N-1.
-5. **PR Creation:** Create a PR from your fork to the master branch of this repository and from your fork's branch to your fork's master branch.
-6. **Wait for Grade:** Once your PR is created, wait for your lab to be reviewed and graded.
+Clone this repository:
 
-### Example for the first lab
+```bash
+git clone https://github.com/Mohammed-Nour/devops-engineering-labs.git
+cd devops-engineering-labs
+```
 
-1. Fork this repository.
-2. Checkout to the lab1 branch.
-3. Complete the lab1 tasks.
-4. Push the code to your repository.
-5. Create a PR to the master branch of this repository from your fork's lab1 branch.
-6. Create a PR to the master branch of your repository from your lab1 branch.
-7. Wait for your grade.
+Choose an application and follow its setup guide:
 
-## Grading and Grades Distribution
+- [Python application](app_python/README.md): installation, local execution, tests, and Docker.
+- [Go application](app_go/README.md): local execution, tests, and container builds.
+- [React application](app_react/README.md): frontend development and build instructions.
 
-Your final grade will be determined based on labs and a final exam:
+For the infrastructure labs, follow the relevant Ansible, Terraform, or Kubernetes guide with your own environment settings. Some older instructions use the repository name `S25-core-course-labs`; use the directory you cloned above instead.
 
-- Labs: 70% of your final grade.
-- Final Exam: 30% of your final grade.
+## Related work
 
-Grade ranges:
-
-- [90-100] - A
-- [75-90) - B
-- [60-75) - C
-- [0-60) - D
-
-### Labs Grading
-
-Each lab is worth 10 points. Completing main tasks correctly earns you 10 points. Completing bonus tasks correctly adds 2.5 points. You can earn a maximum of 12.5 points per lab by completing all main and bonus tasks.
-
-Finishing all bonus tasks lets you skip the exam and grants you 5 extra points. Incomplete bonus tasks require you to take the exam, which could save you from failing it.
-
->The labs account for 70% of your final grade. With 14 labs in total, each lab contributes 5% to your final grade. Completing all main tasks in a lab earns you the maximum 10 points, which corresponds to 5% of your final grade.
->If you successfully complete all bonus tasks, you'll earn an additional 2.5 points, totaling 12.5 points for that lab, or 6.25% of your final grade. Over the course of all 14 labs, the cumulative points from bonus tasks add up to 87.5% of your final grade.
->Additionally, a 5% bonus is granted for successfully finishing all bonus tasks, ensuring that if you successfully complete everything, your final grade will be 92.5%, which corresponds to an A grade.
-
-## Deadlines and Labs Distribution
-
-Each week, two new labs will be available. You'll have one week to submit your solutions. Refer to Moodle for presentation slides and deadlines.
-
-## Submission Policy
-
-Submitting your lab results on time is crucial for your grading. Late submissions receive a maximum score of 6 points for the corresponding lab. Remember, completing all labs is necessary to successfully pass the course.
+- [Wazuh incident-response research](https://github.com/Mohammed-Nour/mcp-server-wazuh/tree/main/research)
+- [Vault with Kubernetes: four secret-management use cases](https://github.com/Mohammed-Nour/vault-secret-use-cases-project)
+- [Portfolio](https://mohamadnourshahin.com/) · [LinkedIn](https://www.linkedin.com/in/mohamad-nour0/)
