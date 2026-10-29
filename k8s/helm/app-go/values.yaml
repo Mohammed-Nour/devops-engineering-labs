@@ -114,6 +114,10 @@ volumes:
   - name: go-volume
     configMap:
       name: go-config
+
+
+  - name: init-volume
+    emptyDir: {}
 # - name: foo
 #   secret:
 #     secretName: mysecret
@@ -125,6 +129,11 @@ volumeMounts:
     mountPath: "/config/config.json"
     subPath: "config.json"
     readOnly: true
+
+
+  - name: init-volume
+    mountPath: "/init-volume"
+
 # - name: foo
 #   mountPath: "/etc/foo"
 #   readOnly: true
@@ -143,3 +152,16 @@ podManagementPolicy: Parallel
 volumeClaimTemplates:
   name: app-go-pvc
   storage: 512Mi
+
+
+initContainers:
+  - name: init-demo
+    image: busybox:1.28
+    command:
+    - wget
+    - "-O"
+    - "/init-volume/index.html"
+    - https://example.com
+    volumeMounts:
+    - name: init-volume
+      mountPath: "/init-volume"
